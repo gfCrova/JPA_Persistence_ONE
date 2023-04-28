@@ -22,12 +22,20 @@ public class RegistroDeProductos {
 
         em.getTransaction().begin();
 
-        productoDAO.guardar(celular);
-        categoriaDAO.guardar(celulares);
+        em.persist(celulares);
+        celulares.setNombre("SMARTPHONES");
 
-        //em.persist(celular);
-        em.getTransaction().commit();
-        em.close();
+        //productoDAO.guardar(celular);
+        //categoriaDAO.guardar(celulares);
 
+        em.flush(); // flush() -> sincronizar
+        em.clear();
+
+        celulares = em.merge(celulares); // merge(T) -> Traer los registros deseados con estado Managed.
+        celulares.setNombre("CELULARES");  //  Al estar después del clear() se encuentra en estado Detached. A no ser que haya un merge() antes.
+
+        em.flush();
+        em.remove(celulares);
+        em.flush();
     }
 }

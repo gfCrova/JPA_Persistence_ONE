@@ -14,7 +14,7 @@ public class Producto {
     private String descripcion;
     private BigDecimal precio;
     private LocalDate fechaDeRegistro = LocalDate.now();
-    @ManyToOne  // Relación entre la entidad producto y categoria
+    @ManyToOne  // Relación (muchos a uno)
     private Categoria categoria;
 
     public Producto() {
@@ -57,5 +57,13 @@ public class Producto {
 
     public void setPrecio(BigDecimal precio) {
         this.precio = precio;
+    }
+
+    public LocalDate getFechaDeRegistro() {
+        return fechaDeRegistro;
+    }
+
+    public void setFechaDeRegistro(LocalDate fechaDeRegistro) {
+        this.fechaDeRegistro = fechaDeRegistro;
     }
 }

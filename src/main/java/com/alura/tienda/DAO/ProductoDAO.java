@@ -3,6 +3,7 @@ package com.alura.tienda.DAO;
 import com.alura.tienda.Entities.Producto;
 
 import javax.persistence.EntityManager;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ProductoDAO{
@@ -33,11 +34,16 @@ public class ProductoDAO{
 
     public List<Producto> consultaPorNombre(String nombre) {
         String jpql = "SELECT p FROM Producto AS p WHERE p.nombre=:nombre";
-        return em.createQuery(jpql).setParameter("nombre", nombre).getResultList();
+        return em.createQuery(jpql, Producto.class).setParameter("nombre", nombre).getResultList();
     }
 
     public List<Producto> consultarPorNombreCategoria(String nombre) {
         String jpql = "SELECT p FROM Producto AS p WHERE p.categoria.nombre=:nombre";
-        return em.createQuery(jpql).setParameter("nombre", nombre).getResultList();
+        return em.createQuery(jpql, Producto.class).setParameter("nombre", nombre).getResultList();
+    }
+
+    public BigDecimal consultarPrecioPorNombreProducto(String nombre) {
+        String jpql = "SELECT p.precio FROM Producto AS p WHERE p.nombre=:nombre";
+        return em.createQuery(jpql, BigDecimal.class).setParameter("nombre", nombre).getSingleResult();
     }
 }

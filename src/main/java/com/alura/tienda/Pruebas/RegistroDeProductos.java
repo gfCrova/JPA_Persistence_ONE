@@ -35,6 +35,10 @@ public class RegistroDeProductos {
         // Consultar Por NOMBRE De CATEGORIA
         List<Producto> productoPorNombreCat = productoDAO.consultarPorNombreCategoria("TVs");
         productoPorNombreCat.forEach(producto -> System.out.println(producto.getNombre()));
+
+        // Consultar Precio Por Nombre
+        BigDecimal precioPorNombre = productoDAO.consultarPrecioPorNombreProducto("Noblex");
+        System.out.println(precioPorNombre);
     }
 
     private static void registrarProducto() {

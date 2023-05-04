@@ -1,5 +1,6 @@
 # Persistencia JPA: Hibernate
 
+
 - Configurar JPA a través del archivo de persistencia.xml 
 
   Luego de haber agregado las dependencias debemos configurar la base de datos con JPA a través del archivo persistence.xml.

@@ -1,5 +1,6 @@
 # Persistencia JPA: Hibernate
 
+## 1
 
 - Configurar JPA a través del archivo de persistencia.xml 
 
@@ -42,4 +43,6 @@
   Para eso vimos el esquema gráfico donde comenzamos por el estado transiente que tiene una entidad al ser instanciada, luego pasamos al estado Managed utilizando el método persist() de JPA hasta el momento que sincronizamos la información con la base de datos utilizando el método ```flush()``` o ```commit()``` de JPA.
 
 - Realizar consultas a través de JPQL
+
+## 2
 

@@ -3,6 +3,8 @@ package com.alura.tienda.Entities;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "pedidos")
@@ -15,8 +17,15 @@ public class Pedido {
     private final LocalDate fecha = LocalDate.now();
     private BigDecimal valorTotal;
 
-    @ManyToOne
+    @ManyToOne // -> "Un" Cliente puede tener "Muchos" pedidos
     private Cliente cliente;
+
+    /*@ManyToMany // ≥ Un pedido puede tener "Muchos" -> productos (lista), y estos a la vez pueden tener "Muchos" -> pedidos
+    @JoinTable(name="items_pedido") // Nueva tabla de relación pedidos - productos
+    private List<Producto> productos;*/
+
+    @OneToMany(mappedBy="pedido")  // mappedBy -> Conectar a la tabla indicada
+    private List<ItemsPedido> items = new ArrayList<>(); // Cuando es lista la relación es "Uno" a "Muchos"
 
     public Pedido() {
     }
@@ -47,5 +56,10 @@ public class Pedido {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public void agregarItems(ItemsPedido item) {
+        item.setPedido(this);
+        this.items.add(item);
     }
 }

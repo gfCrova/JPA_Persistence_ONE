@@ -14,7 +14,7 @@ public class Producto {
     private String descripcion;
     private BigDecimal precio;
     private LocalDate fechaDeRegistro = LocalDate.now();
-    @ManyToOne  // Relación (muchos a uno)
+    @ManyToOne  // "Una" categoría tiene "Muchos" productos
     private Categoria categoria;
 
     public Producto() {

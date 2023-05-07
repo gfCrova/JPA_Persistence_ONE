@@ -15,7 +15,7 @@ public class Pedido {
     @Column(name = "id", nullable = false)
     private Long id;
     private final LocalDate fecha = LocalDate.now();
-    private BigDecimal valorTotal;
+    private BigDecimal valorTotal = new BigDecimal(0);
 
     @ManyToOne // -> "Un" Cliente puede tener "Muchos" pedidos
     private Cliente cliente;
@@ -24,7 +24,7 @@ public class Pedido {
     @JoinTable(name="items_pedido") // Nueva tabla de relación pedidos - productos
     private List<Producto> productos;*/
 
-    @OneToMany(mappedBy="pedido")  // mappedBy -> Conectar a la tabla indicada
+    @OneToMany(mappedBy="pedido", cascade = CascadeType.ALL)  // mappedBy -> Conectar a la tabla indicada
     private List<ItemsPedido> items = new ArrayList<>(); // Cuando es lista la relación es "Uno" a "Muchos"
 
     public Pedido() {
@@ -61,5 +61,6 @@ public class Pedido {
     public void agregarItems(ItemsPedido item) {
         item.setPedido(this);
         this.items.add(item);
+        this.valorTotal = this.valorTotal.add(item.getValor());
     }
 }

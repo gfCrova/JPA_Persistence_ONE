@@ -30,22 +30,12 @@ public class ClienteDAO {
     }
 
     public List<Cliente> consultarTodos() {
-        String jpql = "SELECT p FROM Producto AS p";
+        String jpql = "SELECT p FROM Cliente AS p";
         return em.createQuery(jpql, Cliente.class).getResultList();
     }
 
     public List<Cliente> consultaPorNombre(String nombre) {
-        String jpql = "SELECT p FROM Producto AS p WHERE p.nombre=:nombre";
+        String jpql = "SELECT p FROM Cliente AS p WHERE p.nombre=:nombre";
         return em.createQuery(jpql, Cliente.class).setParameter("nombre", nombre).getResultList();
-    }
-
-    public List<Cliente> consultarPorNombreCategoria(String nombre) {
-        String jpql = "SELECT p FROM Producto AS p WHERE p.categoria.nombre=:nombre";
-        return em.createQuery(jpql, Cliente.class).setParameter("nombre", nombre).getResultList();
-    }
-
-    public BigDecimal consultarPrecioPorNombreProducto(String nombre) {
-        String jpql = "SELECT p.precio FROM Producto AS p WHERE p.nombre=:nombre";
-        return em.createQuery(jpql, BigDecimal.class).setParameter("nombre", nombre).getSingleResult();
     }
 }

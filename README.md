@@ -1,5 +1,6 @@
 # Persistencia JPA: Hibernate
 
+## 1
 
 - Configurar JPA a través del archivo de persistencia.xml 
 
@@ -43,3 +44,11 @@
 
 - Realizar consultas a través de JPQL
 
+## 2
+
+- Modelar correctamente las relaciones bidireccionales
+- Usar la función Seleccionar nueva para realizar consultas avanzadas
+- Comprender la diferencia entre las relaciones EAGER y LAZY
+- Descubrir la característica de búsqueda conjunta para planificar consultas
+- Explore la API de criterios JPA
+- Aprenda a mapear entidades usando herencia y clave compuesta

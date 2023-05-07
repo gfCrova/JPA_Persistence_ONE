@@ -6,7 +6,8 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "productos")
-public class Pedido {
+@NamedQuery(name="Producto.consultaDePrecio", query="SELECT p.precio FROM Producto AS p WHERE p.nombre=:nombre")
+public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

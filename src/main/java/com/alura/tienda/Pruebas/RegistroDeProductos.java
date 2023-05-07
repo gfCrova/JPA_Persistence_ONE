@@ -20,7 +20,7 @@ public class RegistroDeProductos {
 
         ProductoDAO productoDAO = new ProductoDAO(em);
 
-        // Consultar Por ID
+        // Consultar Por sID
         Producto producto1 = productoDAO.consultarPorId(1L);
         System.out.println(producto1.getNombre());
 

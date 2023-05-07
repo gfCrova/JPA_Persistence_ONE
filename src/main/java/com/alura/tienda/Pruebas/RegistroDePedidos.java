@@ -1,44 +1,46 @@
 package com.alura.tienda.Pruebas;
 
 import com.alura.tienda.DAO.CategoriaDAO;
+import com.alura.tienda.DAO.ClienteDAO;
+import com.alura.tienda.DAO.PedidoDAO;
 import com.alura.tienda.DAO.ProductoDAO;
-import com.alura.tienda.Entities.Categoria;
-import com.alura.tienda.Entities.Producto;
+import com.alura.tienda.Entities.*;
 import com.alura.tienda.Utils.JPAUtils;
+import com.alura.tienda.VO.RelatorioDeVenta;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class RegistroDeProductos {
+public class RegistroDePedidos {
 
     public static void main(String[] args) {
 
         registrarProducto();
 
         EntityManager em = JPAUtils.getEntityManager();
-
         ProductoDAO productoDAO = new ProductoDAO(em);
+        Producto producto = productoDAO.consultarPorId(1L);
 
-        // Consultar Por ID
-        Producto producto1 = productoDAO.consultarPorId(1L);
-        System.out.println(producto1.getNombre());
+        ClienteDAO clienteDAO = new ClienteDAO(em);
+        PedidoDAO pedidoDAO = new PedidoDAO(em);
 
-        // Consultar TODOS
-        List<Producto> productoList = productoDAO.consultarTodos();
-        productoList.forEach(producto -> System.out.println(producto.getDescripcion()));
+        Cliente cliente = new Cliente("Juan", "34567654");
+        Pedido pedido = new Pedido(cliente);
+        pedido.agregarItems(new ItemsPedido(5, producto, pedido));
 
-        // Consultar Por NOMBRE
-        List<Producto> productoPorNombre = productoDAO.consultaPorNombre("Samsung S20");
-        productoPorNombre.forEach(producto -> System.out.println(producto.getPrecio()));
+        em.getTransaction().begin();
 
-        // Consultar Por NOMBRE De CATEGORIA
-        List<Producto> productoPorNombreCat = productoDAO.consultarPorNombreCategoria("TVs");
-        productoPorNombreCat.forEach(producto -> System.out.println(producto.getNombre()));
+        clienteDAO.guardar(cliente);
+        pedidoDAO.guardar(pedido);
 
-        // Consultar Precio Por Nombre
-        BigDecimal precioPorNombre = productoDAO.consultarPrecioPorNombreProducto("Noblex");
-        System.out.println(precioPorNombre);
+        em.getTransaction().commit();
+
+        BigDecimal valorTotal = pedidoDAO.valorTotalDeVenta();
+        System.out.println("Valor Total: " + valorTotal);
+
+        List<RelatorioDeVenta> relatorio = pedidoDAO.relatorioDeVentasVO();
+        relatorio.forEach(System.out::println);
     }
 
     private static void registrarProducto() {

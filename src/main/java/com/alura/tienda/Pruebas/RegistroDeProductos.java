@@ -3,6 +3,7 @@ package com.alura.tienda.Pruebas;
 import com.alura.tienda.DAO.CategoriaDAO;
 import com.alura.tienda.DAO.ProductoDAO;
 import com.alura.tienda.Entities.Categoria;
+import com.alura.tienda.Entities.CategoriaId;
 import com.alura.tienda.Entities.Producto;
 import com.alura.tienda.Utils.JPAUtils;
 
@@ -32,13 +33,16 @@ public class RegistroDeProductos {
         List<Producto> productoPorNombre = productoDAO.consultaPorNombre("Samsung S20");
         productoPorNombre.forEach(producto -> System.out.println(producto.getPrecio()));
 
-        // Consultar Por NOMBRE De CATEGORIA
+        /* Consultar Por NOMBRE De CATEGORIA
         List<Producto> productoPorNombreCat = productoDAO.consultarPorNombreCategoria("TVs");
-        productoPorNombreCat.forEach(producto -> System.out.println(producto.getNombre()));
+        productoPorNombreCat.forEach(producto -> System.out.println(producto.getNombre()));*/
 
         // Consultar Precio Por Nombre
         BigDecimal precioPorNombre = productoDAO.consultarPrecioPorNombreProducto("Noblex");
         System.out.println(precioPorNombre);
+
+        Categoria find = em.find(Categoria.class, new CategoriaId("SMARTPHONES", "1234"));
+        System.out.println(find.getNombre());
     }
 
     private static void registrarProducto() {

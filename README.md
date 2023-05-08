@@ -44,9 +44,9 @@
 
 - Realizar consultas a través de JPQL
 
-## 2
+<br>
 
-### Consultas avanzadas, performance y modelos complejos
+## 2  Consultas avanzadas, performance y modelos complejos
 
 - Modelar correctamente las relaciones bidireccionales
 - Usar la función Seleccionar nueva para realizar consultas avanzadas

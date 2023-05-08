@@ -10,13 +10,14 @@ import java.io.FileNotFoundException;
 public class PruebaDeDesempenho {
     public static void main(String[] args) throws FileNotFoundException {
         LoadRecords.cargarRegistros();
+
         EntityManager em = JPAUtils.getEntityManager();
         PedidoDAO pedidoDao = new PedidoDAO(em);
         Pedido pedidoConCliente = pedidoDao.consultarPedidoConCliente(2L);
         em.close();
 
-//        System.out.println(pedido.getFecha());
-//        System.out.println(pedido.getItems().size());
+        //System.out.println(pedido.getFecha());
+        //System.out.println(pedido.getItems().size());
         System.out.println(pedidoConCliente.getCliente().getNombre());
     }
 }

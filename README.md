@@ -46,6 +46,8 @@
 
 ## 2
 
+### Consultas avanzadas, performance y modelos complejos
+
 - Modelar correctamente las relaciones bidireccionales
 - Usar la función Seleccionar nueva para realizar consultas avanzadas
 - Comprender la diferencia entre las relaciones EAGER y LAZY
